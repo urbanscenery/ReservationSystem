@@ -46,8 +46,8 @@ AccommList* AccommList::searchAccomm(char* city, int date)
 {
 	AccommList* list = new AccommList();
 	Accomm* accomm = this -> getHead();
-	for(int i = 0, max = this -> getCount() ; i < max ; i++){
-		if(!strcmp(city, accomm->getCity())&& (date == accomm->getDate())){
+	for (int i = 0, max = this -> getCount() ; i < max ; i++) {
+		if (!strcmp(city, accomm->getCity()) && (date == accomm->getDate())) {
 			list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), accomm->getDate(), accomm->getOpqPrice());
 		}
 		accomm = accomm -> getNext();
@@ -57,5 +57,38 @@ AccommList* AccommList::searchAccomm(char* city, int date)
 
 void AccommList::alignAccommList(int alignMethod)
 {
+	Accomm* head = this -> getHead();
+	Accomm* fromPtr = this -> head;
+	Accomm* temp = NULL;
+	for (int i = 0 , maxi = this -> getCount() - 1; i < maxi ; i++) {
+		for (int j = 0 , maxj = maxi - i ; j < maxj ; j++) {
+			if (alignMethod == 1) {
+				if ((head -> getDate()) > (head -> getNext() -> getDate())) {
+					temp = head -> getNext();
+					head -> setNext(head -> getNext() -> getNext());
+					temp -> setNext(head);
+					fromPtr -> setNext(temp);
+					fromPtr = fromPtr -> getNext();
+				}
+				else {
+					fromPtr = fromPtr -> getNext();
+					head = head -> getNext();
+				}
+			}
+			else {
+				if ((head -> getPrice()) > (head -> getNext() -> getPrice())) {
+					temp = head -> getNext();
+					head -> setNext(head -> getNext() -> getNext());
+					temp -> setNext(head);
+					fromPtr -> setNext(temp);
+					fromPtr = fromPtr -> getNext();
+				}
+				else {
+					fromPtr = fromPtr -> getNext();
+					head = head -> getNext();
+				}
+			}
+		}
+	}
 
 }

@@ -155,10 +155,11 @@ void searchAccomm(Session session, FILE* in_fp, FILE* out_fp)
 	fprintf(out_fp, "%s %s %s\n", city, date, id);
 	*/
 	AccommList* alist = new AccommList();
-	alist -> insertNode("a", "daegu", 10000, 20170101, 100000);
+	alist -> insertNode("a", "daegu", 100000, 20170101, 100000);
 	alist -> insertNode("b", "daegu", 10000, 20170101, 100000);
 	alist -> insertNode("c", "asdfsdf", 10000, 20170101, 100000);
 	AccommList* newlist = alist -> searchAccomm("daegu", 20170101);
+	newlist -> alignAccommList(1);
 	newlist -> displayAccommList();
 	return;
 }

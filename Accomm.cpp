@@ -92,3 +92,9 @@ int Accomm::getOpqPrice()
 	return opqPrice;
 }
 
+char* Accomm::getHostID()
+{
+	return hostID;
+}
+
+

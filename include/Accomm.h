@@ -9,6 +9,7 @@ class Accomm
 private:
 	char accommID[MAX_STRING];
 	char city[MAX_STRING];
+	char hostID[MAX_STRING];
 	//string subaddress[MAX_STRING];
 	//int bedCount;
 	//int bathCount;
@@ -29,6 +30,7 @@ public:
 	void getReservation();
 	char* getID();
 	char* getCity();
+	char* getHostID();
 	int getDate();
 	int getPrice();
 	int getOpqPrice();
