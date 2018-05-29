@@ -21,10 +21,9 @@ int AccommList::getCount()
 Accomm* AccommList::getHead() {
 	return head->getNext();
 }
-void AccommList::insertNode(char * accommID, char* city, int price, char* date, int opqPrice) {
-	
-
+void AccommList::insertNode(char * accommID, char* city, int price, int date, int opqPrice) {
 	Accomm* newAccomm = new Accomm(accommID, city, price, date, opqPrice);	//새로운 숙소노드 생성
+	printf("%s %s %d %d %d **** \n", newAccomm -> getID(), newAccomm -> getCity(), newAccomm -> getPrice(), newAccomm -> getDate(), newAccomm -> getOpqPrice() );
 
 	tail->setNext(newAccomm);	//숙소리스트 마지막에 새로운 숙소노드를 추가한다.
 	tail = newAccomm;			//마지막 포인터는 새로운 숙소노드를 가리키게 재설정한다.
@@ -34,12 +33,29 @@ void AccommList::insertNode(char * accommID, char* city, int price, char* date, 
 
 void AccommList::displayAccommList()
 {
-	//모든 숙소 리스트를 화면에 보여준다. 테스트용 함수
 	Accomm * temp = head->getNext();
 
 	for (int i = 0; i < count; i++) {
-		temp->getAccommDetails();
+		printf("%s ", temp->getID());
 		temp = temp->getNext();
 	}
-	//cout << "현재 카운트는 " << count << endl;
+	printf("\n");
+}
+
+AccommList* AccommList::searchAccomm(char* city, int date)
+{
+	AccommList* list = new AccommList();
+	Accomm* accomm = this -> getHead();
+	for(int i = 0, max = this -> getCount() ; i < max ; i++){
+		if(!strcmp(city, accomm->getCity())&& (date == accomm->getDate())){
+			list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), accomm->getDate(), accomm->getOpqPrice());
+		}
+		accomm = accomm -> getNext();
+	}
+	return list;
+}
+
+void AccommList::alignAccommList(int alignMethod)
+{
+
 }

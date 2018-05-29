@@ -4,6 +4,8 @@
 #include <iostream>
 
 #include "main.h"
+#include "AccommManager.h"
+#include "GuestSearchAccommUI.h"
 
 #define MAX_STRING 32
 #define INPUT_FILE_NAME "input.txt"
@@ -141,6 +143,9 @@ void doTask()
 
 void searchAccomm(Session session, FILE* in_fp, FILE* out_fp)
 {
+	GuestSearchAccommUI ui;
+	ui.startUI(session, in_fp, out_fp);
+	/*
 	char city[MAX_STRING], date[MAX_STRING];
 	fscanf(in_fp, "%s %s", city, date);
 	char id[MAX_STRING];
@@ -148,6 +153,13 @@ void searchAccomm(Session session, FILE* in_fp, FILE* out_fp)
 	printf("%s %s %s\n", city, date, id);
 	fprintf(out_fp, "4.1 숙소검색\n");
 	fprintf(out_fp, "%s %s %s\n", city, date, id);
+	*/
+	AccommList* alist = new AccommList();
+	alist -> insertNode("a", "daegu", 10000, 20170101, 100000);
+	alist -> insertNode("b", "daegu", 10000, 20170101, 100000);
+	alist -> insertNode("c", "asdfsdf", 10000, 20170101, 100000);
+	AccommList* newlist = alist -> searchAccomm("daegu", 20170101);
+	newlist -> displayAccommList();
 	return;
 }
 

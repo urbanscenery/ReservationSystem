@@ -1,7 +1,7 @@
 CXX					=	g++ 
 SRCS				=	$(wildcard *.cpp) $(wildcard *.c)
 OBJS				=	$(SRCS:.cpp=.o)
-TARGET			=	out 
+TARGET			=	test 
 INC					=	-I./include
 
 all	:	$(TARGET)

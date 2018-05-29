@@ -13,7 +13,7 @@ private:
 	//int bedCount;
 	//int bathCount;
 	int price;
-	char date[MAX_STRING];
+	int date;
 	int opqPrice;
 	int opqCheck;
 	char reservationCheck;
@@ -22,13 +22,18 @@ private:
 
 public:
 	Accomm();
-	Accomm(char * accommID, char* city, int price, char * date, int opqPrice);
+	Accomm(char * accommID, char* city, int price, int date, int opqPrice);
 	~Accomm();
 	char* getAccommDetails();
 	void getAccommLists();
 	void getReservation();
+	char* getID();
+	char* getCity();
+	int getDate();
+	int getPrice();
+	int getOpqPrice();
 	
-	void setData(char * id, char * ct, int pr, char* dt, int opqPr);//삭제
+	void setData(char * id, char * ct, int pr, int dt, int opqPr);//삭제
 	void setOpqPrice(int opqPrice);
 	void setOpqCheck();
 	void setReservationCheck();
