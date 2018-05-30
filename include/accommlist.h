@@ -17,7 +17,7 @@ public:
 	void insertNode(char * accommID, char* city, int price, int date, int opqPrice);
 	void deleteNode();
 	void displayAccommList();
-	AccommList* searchAccomm(char* city, int date);
+	AccommList* searchAccomm(char* index1, int date, int searchMethod);
 	void alignAccommList(int alignMethod);
 };
 

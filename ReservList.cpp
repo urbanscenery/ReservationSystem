@@ -38,17 +38,15 @@ void ReservList::displayReservList()
 {
 	Reservation* temp = head->getNext();
 	for(int i = 0 ; i < count ; i++){
-		printf("%s %s llllll", temp->getHostID(), temp->getGuestID());
 		temp = temp->getNext();
 	}
-	printf("\n");
 }
 ReservList* ReservList::searchReservation(char* guestID)
 {
 	ReservList* list = new ReservList();
 	Reservation* reservation = this -> getHead();
 	for(int i = 0, max = this -> getCount() ; i < max ; i++){
-		if((reservation->getGuestID()) == guestID){
+		if(!strcmp(reservation->getGuestID(), guestID)){
 			list -> insertNode(reservation->getGuestID(), reservation -> getAccomm());
 		}
 		reservation = reservation -> getNext();

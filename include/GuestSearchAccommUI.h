@@ -1,17 +1,16 @@
 #pragma once
 #include<string.h>
-#include "main.h"
 #include "AccommManager.h"
+#include "AccommList.h"
 #include "Accomm.h"
 
 #define MAX_STRING 32
 using namespace std;
 
 class AccommManager;
-class Session;
 
 class GuestSearchAccommUI
 {
 public:
-	void startUI(Session session, FILE* in_fp, FILE* out_fp);
+	void startUI(FILE* in_fp, FILE* out_fp, AccommManager* accommManager, AccommList* allAccommList);
 };

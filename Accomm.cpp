@@ -14,17 +14,12 @@ Accomm::Accomm(char * id, char * ct, int pr, int dt, int opqPr)
 	date = dt;
 	opqPrice = opqPr;
 	reservationCheck = 'X';
-
+	next = NULL;
 }
 
 
 Accomm::~Accomm()
 {
-}
-
-char* Accomm::getAccommDetails()
-{
-
 }
 
 void Accomm::getAccommLists()

@@ -1,1 +1,71 @@
-7.1. Á¾·á
+6.2. Gueset sessionÀ¸·Î º¯°æ
+1.1. Sign up
+> host KIM 941119 °æ±â°í¾ç½Ã b311034 qwe123
+1.1. Sign up
+> guest ZBC 941119 °í¾ç°í¾ç½Ã a110325 123123
+1.1. Sign up
+> host ABCd 941119 °í¾ç°í¾ç½Ã c110322 123123
+2.1. Sign in
+> c110322 123123
+6.2. Gueset sessionÀ¸·Î º¯°æ
+2.1. Sign in
+> b311034 qwe123
+2.2. Log out
+> b311034
+1.2. Member withdrawal
+> b311034
+6.2. Gueset sessionÀ¸·Î º¯°æ
+2.1. Sign in
+> a110325 123123
+6.1. Session change 
+> c110322
+3.1. 숙소등록
+> room1 seoul 100000 20180520 70000
+
+3.1. 숙소등록
+> room2 seoul 80000 20180520 70000
+
+3.1. 숙소등록
+> room3 seoul 70000 20180520 80000
+
+3.1. 숙소등록
+> room4 busan 300000 20180830 0
+
+3.1. 숙소등록
+> room5 busan 400000 20180830 80000
+
+3.1. 숙소등록
+> room6 daegu 300000 20180830 0
+
+3.1. 숙소등록
+> room7 daegu 150000 20180830 10000
+
+3.1. 숙소등록
+> room8 daegu 150000 20180830 8000
+
+3.1. 숙소등록
+> room9 junju 210000 20180830 5500
+
+3.1. 숙소등록
+> room10 junju 160000 20180830 180000
+
+3.2. 등록 숙소 조회
+
+4.1. 숙소검색
+>  room3 seoul 70000
+>  room2 seoul 80000
+>  room1 seoul 100000
+4.1. 숙소검색
+>  room4 busan 300000
+>  room5 busan 400000
+4.2. 숙소예약
+>  room1 seoul 2018:5:20 100000
+4.2. 숙소예약
+>  room3 seoul 2018:5:20 70000
+4.3. Opaque Inventory 예약
+> Success  room7 daegu 2018:8:30 10000
+4.4 예약정보 조회
+>  room1 seoul 20180520 100000
+>  room3 seoul 20180520 70000
+>  room7 daegu 20180830 150000
+7.1. Exit
