@@ -1,7 +1,6 @@
 #pragma once
 #include "AccommManager.h"
 #include "Session.h"
-#include <vector>
 
 
 class HostSearchAccommUI

@@ -1,8 +1,5 @@
 #pragma once
-#include<string.h>
 #include "ReservManager.h"
-#include "ReservList.h"
-#include "Reservation.h"
 #include "Session.h"
 
 #define MAX_STRING 32

@@ -1,8 +1,5 @@
 #pragma once
-#include <cstring>
 #include "Accomm.h"
-using namespace std;
-#define MAX_STRING 32
 
 class Reservation
 {

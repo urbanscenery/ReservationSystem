@@ -1,7 +1,5 @@
 #pragma once
-#include "Member.h"
-#include "Session.h"
-#include <stdio.h>
+#include "MemberManager.h"
 
 class MainUI
 {

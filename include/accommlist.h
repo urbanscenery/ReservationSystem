@@ -1,6 +1,5 @@
 #pragma once
 #include "Accomm.h"
-#include <string.h>
 
 class AccommList
 {
@@ -8,6 +7,9 @@ private:
 	Accomm* head;
 	Accomm* tail;
 	int count;
+	bool searchMethodCheck(char* index1, int date, Accomm* accomm, int method);
+	bool alignMethodCheck(Accomm* accomm, int method);
+
 
 public:
 	AccommList();

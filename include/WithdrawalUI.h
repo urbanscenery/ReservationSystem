@@ -1,6 +1,5 @@
 #pragma once
-#include "Member.h"
-#include <stdio.h>
+#include "MemberManager.h"
 
 class WithdrawalUI
 {

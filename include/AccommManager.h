@@ -1,7 +1,7 @@
 #pragma once
-#include "Accomm.h"
+#include <iostream>
 #include "AccommList.h"
-//#include "Member.h"
+
 class AccommManager
 {
 public:

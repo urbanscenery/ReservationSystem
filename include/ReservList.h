@@ -1,8 +1,6 @@
 #pragma once
+#include <cstring>
 #include "Reservation.h"
-#include <string.h>
-
-using namespace std;
 
 class ReservList
 {

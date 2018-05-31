@@ -1,7 +1,10 @@
 #pragma once
-#include <string.h>
+#include <cstring>
+#include <iostream>
+
 #define MAX_STRING 32
-//using namespace std;
+
+using namespace std;
 
 class Member
 {
@@ -24,7 +27,6 @@ public:
 	char *getAddress();
 	char *getMemberType();
 	Member *getNext();
-	//void setNext(Member **nextMember);
 	void setNext(Member *nextMember);
 	void addMember();
 	void deleteMember();

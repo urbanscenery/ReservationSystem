@@ -1,8 +1,5 @@
 #pragma once
-#include "Reservation.h"
 #include "ReservList.h"
-#include "Accomm.h"
-#include <iostream>
 
 class ReservManager
 {

@@ -1,5 +1,4 @@
 #pragma once
-#include <stdio.h>
 #include "Session.h"
 #include "AccommManager.h"
 

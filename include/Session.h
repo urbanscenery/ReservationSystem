@@ -1,5 +1,5 @@
 #pragma once
-#include <string.h>
+#include <cstring>
 #define MAX_STRING 32
 
 class Session

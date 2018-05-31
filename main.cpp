@@ -1,23 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstdio>
-#include <cstring>
-#include <iostream>
 
-#include "Accomm.h"
-#include "MemberManager.h"
-#include "HostSearchAccommUI.h"
+
+#include "MainUI.h"
+#include "WithdrawalUI.h"
 #include "AddAccommUI.h"
-#include "AccommList.h"
-#include "Host.h"
-#include "Session.h"
-#include "AccommManager.h"
+#include "HostSearchAccommUI.h"
 #include "GuestSearchAccommUI.h"
 #include "ReservAccommUI.h"
-#include "ReservList.h"
-#include "ReservManager.h"
 #include "MyReservationUI.h"
 
-#define MAX_STRING 32
 #define INPUT_FILE_NAME "input.txt"
 #define OUTPUT_FILE_NAME "output.txt"
 

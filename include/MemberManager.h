@@ -1,12 +1,7 @@
+#pragma once
 #include "Member.h"
 #include "Session.h"
-#include "MainUI.h"
-#include "WithdrawalUI.h"
-#include <iostream>
 
-//using namespace std;
-
-#pragma once
 class MemberManager
 {
 public:

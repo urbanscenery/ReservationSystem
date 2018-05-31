@@ -1,13 +1,7 @@
 #pragma once
-#include<string.h>
 #include "ReservManager.h"
-#include "ReservList.h"
-#include "AccommList.h"
 #include "AccommManager.h"
 #include "Session.h"
-
-#define MAX_STRING 32
-using namespace std;
 
 class ReservManager;
 
