@@ -1,11 +1,11 @@
 #include "ReservAccommUI.h"
 
 
-void ReservAccommUI::startAddReservUI(Session* session, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList, AccommList* allAccommList)
+void ReservAccommUI::startAddReservUI(Member** currentUser, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList, AccommList* allAccommList)
 {
 	char hostID[MAX_STRING], accommID[MAX_STRING];
 	char userID[MAX_STRING];
-	strcpy(userID, session->getUserID());
+	strcpy(userID, (*currentUser)->getUserID());
 	fscanf(in_fp, "%s %s", hostID, accommID);
 	AccommList *list = allAccommList -> searchAccomm(accommID, 0, 3);
 	Accomm* accomm = list -> getHead();
@@ -15,29 +15,25 @@ void ReservAccommUI::startAddReservUI(Session* session, FILE* in_fp, FILE* out_f
 	fprintf(out_fp, "> %s %s %s %d:%d:%d %d\n", accomm->getHostID(), accomm->getID(), accomm->getCity(), date/10000, (date%10000)/100, date%100, accomm->getPrice());
 }
 
-void ReservAccommUI::opqReservUI(Session* session, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList, AccommList* allAccommList, AccommManager* accommManager)
+void ReservAccommUI::opqReservUI(Member** currentUser, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList, AccommList* allAccommList, AccommManager* accommManager, Timer* currentTime)
 {
 	char city[MAX_STRING], date[MAX_STRING];
 	char userID[MAX_STRING];
-	char year[5], month[3], day[3];
 	int targetPrice = 0;
 	int successCheck = 0;
 	int intDate = 0;
-	strcpy(userID, session->getUserID());
+	strcpy(userID, (*currentUser)->getUserID());
 	fscanf(in_fp, "%s %s %d", city, date, &targetPrice);
-	for(int i = 0 ; i < 4 ; i++){
-		year[i] = date[i];
+	int currentIntDate = currentTime -> getDate(); 
+	int currentIntTime = currentTime -> getTime();
+	if((currentIntDate - ((*currentUser) -> getMemberTimer() -> getDate())) > 100){
+		(*currentUser) -> getMemberTimer() -> setTimer(currentIntDate, currentIntTime);
+	} else{
+		fprintf(out_fp, "> Try again in 24 hours\n");
+		return;
 	}
-	year[4] = '\0';
-	for(int i = 0 ; i < 2 ; i++){
-		month[i] = date[i+5];
-		day[i] = date[i+8];
-	}	
-	month[2] = '\0';
-	day[2] = '\0';
-	intDate += atoi(year)*10000;
-	intDate += atoi(month)*100;
-	intDate += atoi(day);
+
+	intDate = stoiDate(date);
 	AccommList* list = accommManager -> getAccommLists(city, intDate, 4, allAccommList);
 	Accomm* accomm = list -> getHead();
 	fprintf(out_fp, "4.3. Opaque Inventory 예약\n");
@@ -51,7 +47,7 @@ void ReservAccommUI::opqReservUI(Session* session, FILE* in_fp, FILE* out_fp, Re
 	}
 	if(successCheck){
 		intDate = accomm->getDate();
-		fprintf(out_fp, "> Success %s %s %s %d:%d:%d %d\n",accomm->getHostID(), accomm->getID(), accomm->getCity(), intDate/10000, (intDate%10000)/100, intDate%100, accomm->getOpqPrice());
+		fprintf(out_fp, "> Success %s %s %s %s %d\n",accomm->getHostID(), accomm->getID(), accomm->getCity(), itoaDate(intDate), accomm->getOpqPrice());
 	}else{
 		fprintf(out_fp, "> Try again in 24 hours\n");
 	}

@@ -1,5 +1,6 @@
 #pragma once
 #include "AccommManager.h"
+#include "tool.h"
 
 #define MAX_STRING 32
 using namespace std;

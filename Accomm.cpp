@@ -6,50 +6,35 @@ Accomm::Accomm()
 {
 }
 
-Accomm::Accomm(char * id, char * ct, int pr, int dt, int opqPr)
+Accomm::Accomm(char * accommID, char * city, int price, int date, int opqPrice, char* hostID, int currentTime)
 {
-	strcpy(accommID, id);
-	strcpy(city, ct);
-	price = pr;
-	date = dt;
-	opqPrice = opqPr;
-	reservationCheck = 'X';
+	strcpy(this -> accommID, accommID);
+	strcpy(this -> city, city);
+	this -> price = price;
+	this -> date = date;
+	this -> opqPrice = opqPrice;
+	reservationCheck = 0;
+	strcpy(this->hostID, hostID);
+	accommTimer.setTimer(currentTime);
 	next = NULL;
 }
-
 
 Accomm::~Accomm()
 {
 }
 
-void Accomm::getAccommLists()
+void Accomm::setData(char * accommID, char * city, int price, int date, int opqPrice)
 {
-}
-
-void Accomm::getReservation()
-{
-}
-
-void Accomm::setData(char * id, char * ct, int pr, int dt, int opqPr)
-{
-	strcpy(accommID, id);
-	strcpy(city, ct);
-	price = pr;
-	date = dt;
-	opqPrice = opqPr;
-
-}
-
-void Accomm::setOpqPrice(int opqPrice)
-{
-}
-
-void Accomm::setOpqCheck()
-{
+	strcpy(this -> accommID, accommID);
+	strcpy(this -> city, city);
+	this -> price = price;
+	this -> date = date;
+	this -> opqPrice = opqPrice;
 }
 
 void Accomm::setReservationCheck()
 {
+	reservationCheck = 1;
 }
 
 Accomm * Accomm::getNext()
@@ -90,6 +75,11 @@ int Accomm::getOpqPrice()
 char* Accomm::getHostID()
 {
 	return hostID;
+}
+
+AccommTimer* Accomm::getAccommTimer()
+{
+	return &accommTimer;
 }
 
 

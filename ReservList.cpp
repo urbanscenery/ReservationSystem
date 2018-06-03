@@ -30,10 +30,6 @@ void ReservList::insertNode(char* guestID, Accomm* accomm)
 	tail = newReservation;
 	count++;
 }
-void ReservList::deleteNode()
-{
-
-}
 void ReservList::displayReservList()
 {
 	Reservation* temp = head->getNext();

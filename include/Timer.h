@@ -1,13 +1,20 @@
 #pragma once
+#include <string.h>
+//#include "AccommList.h"
+
 #define MAX_STRING 32 
+
 class Timer
 {
 private: 
-	char time[MAX_STRING];
+	int date;
+	int time;
 public:
 	Timer();
+	Timer(int currentTime);
 	~Timer();
-	char* getTimer();
-	void setTimer(char* date);
+	int getDate();
+	int getTime();
+	void setTimer(int date, int time = 0);
 };
 

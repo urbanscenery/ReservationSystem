@@ -14,39 +14,28 @@ AccommManager::~AccommManager()
 AccommList* AccommManager::getAccommLists(char* index1, int index2, int searchMethod, AccommList* allAccommList)
 {
 	AccommList* list = allAccommList -> searchAccomm(index1, index2, searchMethod);
-	if(searchMethod == 1){
-		list -> alignAccommList(1);
-	}else if(searchMethod == 2){
-		list -> alignAccommList(2);
-	}
+	list -> alignAccommList(searchMethod);
 	return list;
 }
 
-int AccommManager::addNewAccomm(char* userID, char * accommID, char * city, int price, int date, int opqPrice, AccommList* allAccommList)
+int AccommManager::addNewAccomm(char* userID, char * accommID, char * city, int price, int date, int opqPrice, AccommList* allAccommList, Timer* currentTime)
 {
 	Accomm* point = allAccommList->getHead();
-	int size = allAccommList->getCount();
-	bool already = false;				//±âÁ¸¿¡ µî·ÏµÈ ¼÷¼ÒÀÎÁö ¾Ë·ÁÁÖ´Â flag º¯¼ö
+	bool already = false;
 
-	for (int i = 0; i < size; i++) {
-		if (!strcmp(point->getID(), accommID))	//ÀÌ¹Ì µî·ÏµÈ ¼÷¼ÒID¿Í µî·ÏÇÏ·Á´Â ¼÷¼ÒID¸¦ ºñ±³
+	for (int i = 0, max = allAccommList->getCount(); i < max; i++) {
+		if (!strcmp(point->getID(), accommID))
 		{
-			already = true;				//ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì 
-			return -1;					//¼÷¼Ò µî·Ï Ãë¼Ò flag(-1)À» ¸®ÅÏÇÑ´Ù.
+			already = true;
+			return -1;
 		}
-		point = point->getNext();		//ÇöÀç accomm °´Ã¼ÀÇ ID¿Í ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì, ´ÙÀ½ °´Ã¼¸¦ Á¶»çÇÑ´Ù.
+		point = point->getNext();
 	}
-
-//	Accomm* newAccomm = new Accomm(accommID, city, price, date, opqPrice, userID);	//»õ·Î¿î ¼÷¼Ò³ëµå »ý¼º
-	allAccommList->insertNode(accommID, city, price, date, opqPrice);			//»ý¼ºÇÑ ¼÷¼Ò³ëµå¸¦ ¼÷¼Ò¸®½ºÆ®¿¡»ðÀÔ
-	return 1;						//Á¤»óÀûÀ¸·Î ¼÷¼Ò¸¦ µî·ÏÇßÀ½À» ¾Ë¸®´Â flagr(1)À» ¸®ÅÏÇÑ´Ù.
+	allAccommList->insertNode(accommID, city, price, date, opqPrice, userID, currentTime -> getDate());
+	return 1;
 }
 
-void AccommManager::alignPrice(AccommList* list)
+void AccommManager::checkExpiredAccomm(AccommList* allAccommList) 
 {
-	list -> alignAccommList(2);
-}
-void AccommManager::alignDate(AccommList* list)
-{
-	list -> alignAccommList(1);
+	allAccommList->deleteNode();
 }

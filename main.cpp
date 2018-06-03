@@ -1,8 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-
 #include "MainUI.h"
-#include "WithdrawalUI.h"
 #include "AddAccommUI.h"
 #include "HostSearchAccommUI.h"
 #include "GuestSearchAccommUI.h"
@@ -22,36 +20,34 @@ void LogIn();
 void LogOut();
 void changeUserSession();
 void changeGuestSession();
-void program_error(int menu_level_1, int menu_level_2);
+void setCurrentTime();
 void guestSearchAccomm();
 void registReservation();
 void opaqueReservation();
 void myReservation();
-
+void program_error(int menu_level_1, int menu_level_2);
 void program_exit();
+
 
 FILE* in_fp, *out_fp;
 int currentSession = -1;
 
-
 Member *memberList, *currentUser, *logInUser;
 Session *sessionList;
-MemberManager memberManager;
-WithdrawalUI withdrawalUI;
+Timer *currentTime = new Timer('2018:01:01:00:00');
+
 MainUI mainUI;
-
-GuestSearchAccommUI guestSearchAccommUI;
-ReservAccommUI reservAccommUI;
-
-Member member = Member();
 AddAccommUI addAccommUI;
 HostSearchAccommUI hostSearchAccommUI;
+GuestSearchAccommUI guestSearchAccommUI;
+ReservAccommUI reservAccommUI;
+MyReservationUI myReservationUI;
+
+MemberManager memberManager;
 AccommManager accommManager;
+ReservManager reservManager;
 AccommList allAccommList;
 ReservList allReservList;
-ReservManager reservManager;
-MyReservationUI myReservationUI;
-Session session = Session("test");
 
 
 int main()
@@ -175,6 +171,19 @@ void doTask()
 			}
 			break;
 		}
+		case 5:
+		{
+			switch (menu_level_2)
+			{
+			case 1:
+			{
+				setCurrentTime();
+				break;
+			}
+			break;
+			}
+			break;
+		}
 		case 6:
 		{
 			switch (menu_level_2)
@@ -222,7 +231,7 @@ void SignUp()
 
 void Withdrawal()
 {
-	withdrawalUI.withdrawal(in_fp, out_fp, &memberList);
+	mainUI.withdrawal(in_fp, out_fp, &memberList);
 }
 
 void LogIn()
@@ -237,35 +246,33 @@ void LogOut()
 
 void changeUserSession()
 {
-	mainUI.changeSession(in_fp, out_fp, &memberList, &currentUser, &sessionList, &currentSession);
+	mainUI.changeUserSession(in_fp, out_fp, &memberList, &currentUser, &sessionList, &currentSession);
 }
 
 void changeGuestSession()
 {
-	fprintf(out_fp, "6.2. Gueset sessionÀ¸·Î º¯°æ\n");
-	currentUser = NULL;
-	currentSession = 0;
+	mainUI.changeGuestSession(out_fp, &currentUser, &currentSession);
 }
 
 void program_error(int menu_level_1, int menu_level_2)
 {
-	fprintf(out_fp, "%d.%d. À¯È¿ÇÏÁö ¾ÊÀº ¸Þ´º ÀÔ·Â\n", menu_level_1, menu_level_2);
+	mainUI.program_error(out_fp, menu_level_1, menu_level_2);
 }
 
 void addNewAccomm()
 {
-	addAccommUI.enterInfo(&session, in_fp, out_fp, &accommManager, &allAccommList);
+	addAccommUI.enterInfo(&currentUser, in_fp, out_fp, &accommManager, &allAccommList, currentTime);
 }
 
 void searchRegisteredAccomm() 
 {
 
-	hostSearchAccommUI.searchAccomms(&session, in_fp, out_fp, &accommManager, &allAccommList);
+	hostSearchAccommUI.searchAccomms(&currentUser, in_fp, out_fp, &accommManager, &allAccommList);
 
 }
 
 void myReservation(){
-	myReservationUI.startUI(&session, in_fp, out_fp, &reservManager, &allReservList);
+	myReservationUI.startUI(&currentUser, in_fp, out_fp, &reservManager, &allReservList);
 }
 void guestSearchAccomm()
 {
@@ -273,15 +280,22 @@ void guestSearchAccomm()
 }
 
 void registReservation(){
-	reservAccommUI.startAddReservUI(&session, in_fp, out_fp, &reservManager, &allReservList, &allAccommList);
+	reservAccommUI.startAddReservUI(&currentUser, in_fp, out_fp, &reservManager, &allReservList, &allAccommList);
 }
 void opaqueReservation(){
-	reservAccommUI.opqReservUI(&session, in_fp, out_fp, &reservManager, &allReservList, &allAccommList, &accommManager);
+	reservAccommUI.opqReservUI(&currentUser, in_fp, out_fp, &reservManager, &allReservList, &allAccommList, &accommManager, currentTime);
 }
+
+
+void setCurrentTime() 
+{
+	mainUI.setTime(in_fp, out_fp, &accommManager, &allAccommList, currentTime);
+}
+
 
 void program_exit()
 {
-	fprintf(out_fp, "7.1. Exit\n");
+	mainUI.program_exit(out_fp);
 	fclose(in_fp);
 	fclose(out_fp);
 }

@@ -1,9 +1,12 @@
-
 #include "Timer.h"
-
 
 Timer::Timer()
 {
+}
+
+Timer::Timer(int currentTime)
+{
+	date = currentTime;
 }
 
 
@@ -11,12 +14,18 @@ Timer::~Timer()
 {
 }
 
-char* Timer::getTimer()
+int Timer::getDate()
+{
+	return date;
+}
+
+int Timer::getTime()
 {
 	return time;
 }
 
-void Timer::setTimer(char* date)
+void Timer::setTimer(int date, int time)
 {
-
+	this -> date = date;
+	this -> time = time;
 }

@@ -21,19 +21,16 @@ int AccommList::getCount()
 Accomm* AccommList::getHead() {
 	return head->getNext();
 }
-void AccommList::insertNode(char * accommID, char* city, int price, int date, int opqPrice) {
-	Accomm* newAccomm = new Accomm(accommID, city, price, date, opqPrice);	//货肺款 槛家畴靛 积己
-
+void AccommList::insertNode(char * accommID, char* city, int price, int date, int opqPrice, char* hostID, int currentTime) {
+	Accomm* newAccomm = new Accomm(accommID, city, price, date, opqPrice, hostID, currentTime);
 	tail->setNext(newAccomm);
 	tail = newAccomm;
 	count++;
-	displayAccommList();
 }
 
 void AccommList::displayAccommList()
 {
 	Accomm * temp = head->getNext();
-
 	for (int i = 0; i < count; i++) {
 		temp = temp->getNext();
 	}
@@ -44,27 +41,11 @@ AccommList* AccommList::searchAccomm(char* index1, int date, int searchMethod)
 	AccommList* list = new AccommList();
 	Accomm* accomm = this -> getHead();
 	for (int i = 0, max = this -> getCount() ; i < max ; i++) {
-		if (searchMethod == 2) {
-			if (!strcmp(index1, accomm->getCity()) && (date == accomm->getDate())) {
-				list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), accomm->getDate(), accomm->getOpqPrice());
+			if (searchMethodCheck(index1, date, accomm,searchMethod)) {
+				list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), 
+														accomm->getDate(), accomm->getOpqPrice(), accomm-> getHostID(), accomm-> getAccommTimer() -> getDate());
 			}
 			accomm = accomm -> getNext();
-		}
-		else if(searchMethod == 3 ){
-			if (!strcmp(index1, accomm->getID())) {
-				list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), accomm->getDate(), accomm->getOpqPrice());
-			}
-			accomm = accomm -> getNext();
-		}
-		else if (searchMethod == 4) {
-			if(!strcmp(index1, accomm->getCity()) && (date == accomm->getDate())) {
-				if((accomm -> getOpqPrice()) > 0){
-					list -> insertNode(accomm->getID(), accomm->getCity(), accomm->getPrice(), accomm->getDate(), accomm->getOpqPrice());
-				}
-			}
-			accomm = accomm -> getNext();
-		}
-
 	}
 	return list;
 }
@@ -78,8 +59,7 @@ void AccommList::alignAccommList(int alignMethod)
 		head = this -> getHead();
 		fromPtr = this -> head;
 		for (int j = 0 , maxj = maxi - i ; j < maxj ; j++) {
-			if (alignMethod == 1) {
-				if ((head -> getDate()) > (head -> getNext() -> getDate())) {
+				if (alignMethodCheck(head, alignMethod)) {
 					temp = head -> getNext();
 					head -> setNext(head -> getNext() -> getNext());
 					temp -> setNext(head);
@@ -90,21 +70,52 @@ void AccommList::alignAccommList(int alignMethod)
 					fromPtr = fromPtr -> getNext();
 					head = head -> getNext();
 				}
-			}
-			else {
-				if ((head -> getPrice()) > (head -> getNext() -> getPrice())) {
-					temp = head -> getNext();
-					head -> setNext(head -> getNext() -> getNext());
-					temp -> setNext(head);
-					fromPtr -> setNext(temp);
-					fromPtr = fromPtr -> getNext();
-				}
-				else {
-					fromPtr = fromPtr -> getNext();
-					head = head -> getNext();
-				}
-			}
+			
 		}
 	}
-
 }
+
+bool AccommList::searchMethodCheck(char* index1, int date, Accomm* accomm, int method){
+	if(method == 2){
+		return (!strcmp(index1, accomm->getCity()) && (date == accomm->getDate()));
+	}else if(method == 3){
+		return (!strcmp(index1, accomm->getID()));
+	}else if(method == 4){
+		return (!strcmp(index1, accomm->getCity()) && (date == accomm->getDate()) 
+						&& (accomm -> getOpqPrice()) > 0);
+	}
+}
+
+bool AccommList::alignMethodCheck(Accomm* accomm, int method){
+	if(method == 1){
+		return ((accomm -> getDate()) > (accomm -> getNext() -> getDate()));
+	}else if(method == 2){
+		return ((accomm -> getPrice()) > (accomm -> getNext() -> getPrice()));
+	}
+}
+
+void AccommList::deleteNode()
+{
+	Accomm* before = head;
+	Accomm* current = head->getNext();
+	Accomm* temp = NULL;
+		
+
+	while(current!=NULL){
+		if (current->getAccommTimer()->getDate() == 0 ) {
+			before->setNext(current->getNext());
+			if (current == tail) tail = before;
+			temp = current;
+			current = current->getNext();
+			delete temp;
+			count--;
+		}
+		else {
+			before = current;
+			current = current->getNext();
+
+		}
+	}
+}
+
+

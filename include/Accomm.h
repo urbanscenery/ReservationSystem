@@ -1,6 +1,7 @@
 #pragma once
 #include <cstring>
 #include <iostream>
+#include "AccommTimer.h"
 
 #define MAX_STRING 32
 
@@ -19,10 +20,11 @@ private:
 	int opqCheck;
 	bool reservationCheck;
 	Accomm* next;
+	AccommTimer accommTimer;
 
 public:
 	Accomm();
-	Accomm(char * accommID, char* city, int price, int date, int opqPrice);
+	Accomm(char * accommID, char* city, int price, int date, int opqPrice, char * hostID, int currentTime);
 	~Accomm();
 	char* getID();
 	char* getCity();
@@ -31,6 +33,7 @@ public:
 	int getPrice();
 	int getOpqPrice();
 	Accomm* getNext();
+	AccommTimer* getAccommTimer();
 	
 	void setData(char * id, char * ct, int pr, int dt, int opqPr);
 	void setReservationCheck();

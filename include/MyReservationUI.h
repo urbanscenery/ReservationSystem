@@ -10,5 +10,5 @@ class ReservManager;
 class MyReservationUI
 {
 public:
-	void startUI(Session* session, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList);
+	void startUI(Member** currentUser, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList);
 };

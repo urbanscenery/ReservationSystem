@@ -1,6 +1,7 @@
 #pragma once
 #include <cstring>
 #include <iostream>
+#include "MemberTimer.h"
 
 #define MAX_STRING 32
 
@@ -16,6 +17,8 @@ private:
 	char address[MAX_STRING];
 	char memberType[MAX_STRING];
 	Member *next;
+	MemberTimer memberTimer;
+
 public:
 	Member();
 	Member(char *newMemberType, char *newName, char *newResidentNum, char *newAddress, char *newUserID, char *newUserPwd);
@@ -30,6 +33,7 @@ public:
 	void setNext(Member *nextMember);
 	void addMember();
 	void deleteMember();
+	MemberTimer* getMemberTimer();
 };
 
 extern Member member;

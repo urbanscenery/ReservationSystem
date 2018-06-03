@@ -1,10 +1,10 @@
 #include "MyReservationUI.h"
 
-void MyReservationUI::startUI(Session* session, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList)
+void MyReservationUI::startUI(Member** currentUser, FILE* in_fp, FILE* out_fp, ReservManager* reservManager, ReservList* allReservList)
 {
 	ReservList* myReservList;
 	char userID[MAX_STRING];
-	strcpy(userID, session->getUserID());
+	strcpy(userID, (*currentUser)->getUserID());
 	myReservList = reservManager -> getReservLists(userID, allReservList);
 	Reservation* reserv = myReservList -> getHead();
 	fprintf(out_fp, "4.4 예약정보 조회\n");

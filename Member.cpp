@@ -1,4 +1,3 @@
-
 #include "Member.h"
 
 
@@ -13,6 +12,7 @@ Member::Member(char *newMemberType, char *newName, char *newResidentNum, char *n
 	strcpy(residentNum, newResidentNum);
 	strcpy(address, newAddress);
 	strcpy(memberType, newMemberType);
+	memberTimer.setTimer(0);
 }
 
 Member::~Member()
@@ -67,4 +67,8 @@ char * Member::getAddress()
 char * Member::getMemberType()
 {
 	return memberType;
+}
+
+MemberTimer* Member::getMemberTimer(){
+	return &memberTimer;
 }

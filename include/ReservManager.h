@@ -1,5 +1,6 @@
 #pragma once
 #include "ReservList.h"
+#include "Member.h"
 
 class ReservManager
 {

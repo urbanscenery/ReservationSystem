@@ -16,7 +16,7 @@ public:
 	~AccommList();
 	int getCount();
 	Accomm* getHead();
-	void insertNode(char * accommID, char* city, int price, int date, int opqPrice);
+	void insertNode(char * accommID, char* city, int price, int date, int opqPrice,  char* hostID, int currentTime);
 	void deleteNode();
 	void displayAccommList();
 	AccommList* searchAccomm(char* index1, int date, int searchMethod);

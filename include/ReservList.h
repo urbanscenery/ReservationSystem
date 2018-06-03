@@ -15,7 +15,6 @@ public:
 	int getCount();
 	Reservation* getHead();
 	void insertNode(char* guestID, Accomm* accomm);
-	void deleteNode();
 	void displayReservList();
 	ReservList* searchReservation(char* guestID);
 };
